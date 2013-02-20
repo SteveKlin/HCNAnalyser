@@ -70,15 +70,18 @@ public:
     char **list;
 
     double thetaPopulationMutationRate; // = 4 * N_0 * basepairs * mu
+    double tauPopulationRecombinationRate; // = 4 * N_x * basepairs * c
     double muNeutralMutationRate;
-    int basepairs;
+    double cRecombinationRate;
 
     MSModel model;
 
     MSSampleGenerator(int iNumSamples, MSModel iModel, int segSitesIn = 0) {
         muNeutralMutationRate = 1E-9;
+        cRecombinationRate = 1E-8;
         model = iModel;
         thetaPopulationMutationRate = 4*model.currentPopulationSize*model.basepairs*muNeutralMutationRate;
+        tauPopulationRecombinationRate = 4*model.currentPopulationSize*model.basepairs*cRecombinationRate;
 
         numSamples = iNumSamples;
         maxSegSites = (segSitesIn == 0) ? CI_MaxSites : segSitesIn;
@@ -89,8 +92,13 @@ public:
         arguments.push_back("ms");
         arguments.push_back(intToStr(numSamples));
         arguments.push_back(intToStr(1));
+
         arguments.push_back("-t");
         arguments.push_back(floatToStr(thetaPopulationMutationRate));
+
+        arguments.push_back("-r");
+        arguments.push_back(floatToStr(tauPopulationRecombinationRate));
+        arguments.push_back(intToStr(model.basepairs));
 
         for (unsigned int d = 0; d < model.demographicEvents.size(); ++d) {
             DemographicEvent& event = model.demographicEvents[d];

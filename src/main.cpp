@@ -21,10 +21,12 @@ int main(int argc, char *argv[])
     int distinctHaplotypeCountBins = 40;
     int sampleSize = 120;
 
-  //  MSModel model = MSModel::fromGrowthModel(25000, 50000, 0.1);
-    MSModel model = MSModel::fromGrowthModel(12500, 25000, 0.1);
+//    MSModel model = MSModel::fromGrowthModel(25000, 50000, 0.1);
+//    MSModel model = MSModel::fromGrowthModel(12500, 25000, 0.1);
 //    MSModel model = MSModel::fromBottleneckModel(50000, 25000, 50000, 0.1, 0.2);
-    model.basepairs = 1000000;
+//    MSModel model = MSModel::fromGrowthModel(5000, 10000, 0.1);
+    MSModel model = MSModel::fromBottleneckModel(10000, 2000, 10000, 0.1, 0.2);
+    model.basepairs = 250000;
 
     hcnGenerator = new HCNGenerator(mostCommonAlleleCountBins, distinctHaplotypeCountBins, sampleSize, model);
 

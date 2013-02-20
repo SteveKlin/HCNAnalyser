@@ -10,6 +10,7 @@
 
 #define DBG(...)
 
+// HCN summary results of a single simulated sample
 class HCNSample {
 private:
 public:
@@ -46,6 +47,7 @@ public:
   //      int g = haplIndices[j];
         for (int c = 0; c < usedSNPCount; ++c) {
             if ((list[h][snpSubsetIndices[c]] == '1') && (list[g][snpSubsetIndices[c]] == '0')) return false;
+            if ((list[h][snpSubsetIndices[c]] == '0') && (list[g][snpSubsetIndices[c]] == '1')) return true;
         }
         return true;
     }
@@ -78,12 +80,13 @@ public:
     void generateSamples(int sampleCount) {
         MSSampleGenerator sampleGenerator(sampleSize, model);
 
-        int windowCount = 10;
+        int windowCount = 1;
         unsigned int snpSubsetSize = 20;
         unsigned int snpChoiceCount = 10;
         double mafLowerBound = 0.1;
 
         for (int sample = 0; sample < sampleCount; ++sample) {
+            qDebug("%i", sample);
             sampleGenerator.generateNextSample();
 
             double windowDefaultLength = 1.0/windowCount;
@@ -220,11 +223,9 @@ public:
     void generate() {
         HCNSampleGenerator sampleGenerator(sampleSize, model);
 
-        sampleGenerator.generateSamples(1000);
+        sampleGenerator.generateSamples(10000);
 
-        qDebug("Combining samples...");
         combineWithSamples(sampleGenerator.samples);
-        qDebug("HCN Generated");
     }
 
     ~HCNGenerator() {

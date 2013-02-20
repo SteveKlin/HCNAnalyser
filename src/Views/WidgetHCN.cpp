@@ -48,7 +48,8 @@ void WidgetHCN::paintEvent(QPaintEvent* paintEvent) {
                 QColor kol = QColor::fromHslF(vf, 0.75, 0.66);
                 painter.setBrush(QBrush(kol));
                 painter.drawRect((c*width())/mostCommonAlleleCountBins, ((distinctHaplotypeCountBins - 1 - d)*height())/distinctHaplotypeCountBins,
-                                 ((c + 1)*width())/mostCommonAlleleCountBins - (c*width())/mostCommonAlleleCountBins, ((distinctHaplotypeCountBins - 1 - d + 1)*height())/distinctHaplotypeCountBins - ((distinctHaplotypeCountBins - 1 - d)*height())/distinctHaplotypeCountBins
+                                 ((c + 1)*width())/mostCommonAlleleCountBins - (c*width())/mostCommonAlleleCountBins,
+                                 ((distinctHaplotypeCountBins - 1 - d + 1)*height())/distinctHaplotypeCountBins - ((distinctHaplotypeCountBins - 1 - d)*height())/distinctHaplotypeCountBins
                                  );
             }
         }

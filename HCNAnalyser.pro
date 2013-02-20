@@ -12,7 +12,8 @@ HEADERS += \
     src/HCNGenerator.h \
     src/Views/WidgetHCN.h \
     src/Defines.h \
-    src/stringTools.h
+    src/stringTools.h \
+    src/HCNModel.h
 
 SOURCES += \
     src/Views/MainWindow.cpp \
@@ -25,4 +26,5 @@ SOURCES += \
     src/HCNGenerator.cpp \
     src/ms-wrapper/mswrapper.cpp \
     src/Views/WidgetHCN.cpp \
-    src/stringTools.cpp
+    src/stringTools.cpp \
+    src/HCNModel.cpp
