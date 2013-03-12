@@ -40,7 +40,10 @@ int main(int argc, char *argv[])
 
     HCNGrowthModel growthModel;
     growthModel.generateHCNs(0.0, 10.0, 16);
-    growthModel.estimateParameters(5.0);
+    for (int q = 0; q < 16; ++q) {
+        qDebug("Testing sample %i/%i (%f)", q, 16, 10*q/16.0);
+        growthModel.estimateParameters(10*q/16.0);
+    }
 
 
 /*    for (int c = 0; c < mostCommonAlleleCountBins; ++c) {

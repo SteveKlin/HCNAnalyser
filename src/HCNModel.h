@@ -88,7 +88,7 @@ public:
             msModel.basepairs = basepairs;
 
             HCNGenerator hcng(mostCommonAlleleCountBins, distinctHaplotypeCountBins, sampleSize, msModel);
-            hcng.generate(2500);
+            hcng.generate(10000);
 
             ModelData<HCNGrowthModelParameters> d;
             d.parameters.tMid = tMid;
@@ -103,13 +103,13 @@ public:
         msModel.basepairs = basepairs;
 
         HCNGenerator hcng(mostCommonAlleleCountBins, distinctHaplotypeCountBins, sampleSize, msModel);
-        hcng.generate(5000);
+        hcng.generate(10000);
 
         double optLikelihood;
         int optLIndex;
-        for (int i = 0; i < data.size(); ++i) {
+        for (unsigned int i = 0; i < data.size(); ++i) {
             double hcnLikelihood = data[i].getLikelihoodFor(hcng.hcn, mostCommonAlleleCountBins, distinctHaplotypeCountBins);
-            qDebug("Testing model (%i/%i): i = %i LL = %f", i + 1, data.size(), i, hcnLikelihood);
+//            qDebug("Testing model (%i/%i): i = %i LL = %f", i + 1, data.size(), i, hcnLikelihood);
             if ((i == 0) || (hcnLikelihood > optLikelihood)) {
                 optLIndex = i;
                 optLikelihood = hcnLikelihood;
