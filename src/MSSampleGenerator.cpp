@@ -1,3 +1,3 @@
 #include "MSSampleGenerator.h"
 
-int CI_MaxSites = 10;
+int CI_MaxSites = 1024;

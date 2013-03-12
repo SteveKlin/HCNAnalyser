@@ -85,6 +85,7 @@ public:
 
         numSamples = iNumSamples;
         maxSegSites = (segSitesIn == 0) ? CI_MaxSites : segSitesIn;
+        qDebug("maxsegsites = %i", maxSegSites);
         list = cmatrix(numSamples, maxSegSites + 1);
         posit = new double[maxSegSites];
 
@@ -108,18 +109,25 @@ public:
         }
 
         char* args[arguments.size()];
+        std::string cmd;
         for (unsigned int a = 0; a < arguments.size(); ++a) {
             args[a] = new char[arguments[a].length() + 1];
             strcpy(args[a], arguments[a].c_str());
+            cmd += arguments[a] + " ";
         }
+        qDebug("cmd = %s", cmd.c_str());
 
         int howmany;
         getpars(arguments.size(), args, &howmany, &pars);
+
+        for (unsigned int a = 0; a < arguments.size(); ++a) {
+            delete [] args[a];
+        }
     }
 
     ~MSSampleGenerator() {
         delete [] posit;
-        free_cmatrix(list, maxSegSites + 1);
+        free_cmatrix(list, numSamples);
     }
 
     void printSegsiteStats() {

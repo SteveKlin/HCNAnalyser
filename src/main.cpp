@@ -5,6 +5,7 @@
 #include "Views/MainWindow.h"
 
 #include "HCNGenerator.h"
+#include "HCNModel.h"
 
 #include "Views/WidgetHCN.h"
 
@@ -21,11 +22,12 @@ int main(int argc, char *argv[])
     int distinctHaplotypeCountBins = 40;
     int sampleSize = 120;
 
+
 //    MSModel model = MSModel::fromGrowthModel(25000, 50000, 0.1);
 //    MSModel model = MSModel::fromGrowthModel(12500, 25000, 0.1);
 //    MSModel model = MSModel::fromBottleneckModel(50000, 25000, 50000, 0.1, 0.2);
 //    MSModel model = MSModel::fromGrowthModel(5000, 10000, 0.1);
-    MSModel model = MSModel::fromBottleneckModel(10000, 2000, 10000, 0.1, 0.2);
+    /*MSModel model = MSModel::fromBottleneckModel(10000, 2000, 10000, 0.1, 0.2);
     model.basepairs = 250000;
 
     hcnGenerator = new HCNGenerator(mostCommonAlleleCountBins, distinctHaplotypeCountBins, sampleSize, model);
@@ -34,6 +36,12 @@ int main(int argc, char *argv[])
 
     w.widgetHCN->setResolution(mostCommonAlleleCountBins, distinctHaplotypeCountBins, &hcnGenerator->totalSamples);
     w.widgetHCN->setHCNData(hcnGenerator->hcn);
+*/
+
+    HCNGrowthModel growthModel;
+    growthModel.generateHCNs(0.0, 10.0, 16);
+    growthModel.estimateParameters(5.0);
+
 
 /*    for (int c = 0; c < mostCommonAlleleCountBins; ++c) {
         for (int d = 0; d < distinctHaplotypeCountBins; ++d) {
